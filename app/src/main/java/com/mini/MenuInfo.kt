@@ -18,6 +18,23 @@ object Type {
 }
 
 interface Menu
-abstract class Drink(open val menu: String) : Menu {
-    abstract fun make():Drink
+abstract class Drink(val menu: String) : Menu {
+    abstract fun make(): Drink
+    companion object {
+        const val MENU_ESPRESSO = "에스프레소"
+        const val MENU_AMERICANO = "아메리카노"
+        const val MENU_VANILLA_LATTE ="바닐라라떼"
+        const val MENU_CHERRY_ADE = "체리에이드"
+
+        const val WATER = "물"
+        const val SPARKLING_WATER = "탄산수"
+        const val MILK = "우유"
+
+        const val VANILLA_POWDER = "바닐라파우더"
+    }
+}
+
+sealed class State<out R>{
+    data class Success<out T>(val data:T) : State<T>()
+    data class Error(val exception:Exception):State<Nothing>()
 }
